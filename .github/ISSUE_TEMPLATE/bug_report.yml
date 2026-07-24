@@ -1,0 +1,88 @@
+name: Bug report
+description: Report a reproducible defect in an agent-native interface or runtime.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search existing issues first. Report security vulnerabilities through the private process in `SECURITY.md`, not through this form.
+
+  - type: dropdown
+    id: interface
+    attributes:
+      label: Affected interface
+      options:
+        - Agent HTTP or OpenAPI
+        - CLI
+        - MCP
+        - NLWeb
+        - State or SSE
+        - Media
+        - Persistence or containers
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: v0.1.0 or commit SHA
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Include Node.js version, operating system, and container runtime when relevant.
+      placeholder: Node.js 22.17.0, Ubuntu 24.04
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Provide the smallest sequence that reproduces the defect.
+      placeholder: |
+        1. Start the service with ...
+        2. Run ...
+        3. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs or protocol evidence
+      description: Remove tokens, personal data, and unrelated output.
+      render: shell
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched for an existing issue.
+          required: true
+        - label: This report contains no credentials or private data.
+          required: true
+        - label: This is not a security vulnerability.
+          required: true

@@ -1,0 +1,18 @@
+services:
+  agent-web:
+    build: .
+    environment:
+      AGENT_TOKEN: ${AGENT_TOKEN:-replace-this-demo-token}
+    ports:
+      - "127.0.0.1:4317:4317"
+    volumes:
+      - agent-data:/app/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+volumes:
+  agent-data:

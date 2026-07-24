@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Runtime state and local configuration
+data/
+.env
+.env.*
+!.env.example
+*.local
+
+# Test and tooling output
+coverage/
+.nyc_output/
+*.lcov
+*.log
+npm-debug.log*
+
+# Generated media and temporary files
+inspection.png
+tmp/
+.cache/
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Credentials and keys
+*.key
+*.pem
+*.p12

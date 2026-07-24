@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="720" viewBox="0 0 1440 720" role="img" aria-labelledby="title desc">
+  <title id="title">Agent Native Web</title>
+  <desc id="desc">A dark technical banner showing an agent moving through discovery, query, media, preview, commit, and receipt without using a browser.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07100F"/>
+      <stop offset="0.56" stop-color="#0B1715"/>
+      <stop offset="1" stop-color="#10191B"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="0%" r="80%">
+      <stop offset="0" stop-color="#B8FFD8" stop-opacity=".14"/>
+      <stop offset="1" stop-color="#B8FFD8" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#B8FFD8" stroke-opacity=".055"/>
+    </pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000" flood-opacity=".35"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="720" rx="28" fill="url(#bg)"/>
+  <rect width="1440" height="720" rx="28" fill="url(#glow)"/>
+  <rect width="1440" height="720" rx="28" fill="url(#grid)"/>
+  <rect x="1" y="1" width="1438" height="718" rx="27" fill="none" stroke="#B8FFD8" stroke-opacity=".18"/>
+
+  <g transform="translate(92 80)">
+    <rect width="54" height="54" rx="15" fill="#B8FFD8"/>
+    <path d="M15 17h13c8 0 14 6 14 14v5M15 40h14c7 0 13-6 13-13v-5" fill="none" stroke="#0A1211" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="15" cy="17" r="5" fill="#75A7FF"/>
+    <circle cx="15" cy="40" r="5" fill="#0A1211"/>
+    <path d="m34 27 8-8 8 8" fill="none" stroke="#FF8066" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="166" y="116" fill="#E9F4EF" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="25" font-weight="700" letter-spacing="3">AGENT NATIVE WEB</text>
+  <text x="92" y="235" fill="#F5FBF8" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="72" font-weight="760" letter-spacing="-3">The web, without the</text>
+  <text x="92" y="318" fill="#B8FFD8" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="72" font-weight="760" letter-spacing="-3">browser in the loop.</text>
+  <text x="94" y="375" fill="#9EB0AA" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="24">Typed capabilities, direct media, live state, safe actions, durable receipts.</text>
+
+  <g transform="translate(92 428)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="650">
+    <g><rect width="176" height="42" rx="21" fill="#12211D" stroke="#B8FFD8" stroke-opacity=".42"/><circle cx="23" cy="21" r="6" fill="#B8FFD8"/><text x="39" y="27" fill="#DFF5E9">0 browser deps</text></g>
+    <g transform="translate(190)"><rect width="138" height="42" rx="21" fill="#151F2A" stroke="#75A7FF" stroke-opacity=".42"/><circle cx="23" cy="21" r="6" fill="#75A7FF"/><text x="39" y="27" fill="#DFE9FF">22 tests</text></g>
+    <g transform="translate(342)"><rect width="204" height="42" rx="21" fill="#261A16" stroke="#FF8066" stroke-opacity=".42"/><circle cx="23" cy="21" r="6" fill="#FF8066"/><text x="39" y="27" fill="#FFE7DF">~1.5ms query</text></g>
+  </g>
+
+  <g transform="translate(92 535)" filter="url(#shadow)">
+    <rect width="1256" height="110" rx="20" fill="#0A1211" stroke="#2A3A36"/>
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="650" text-anchor="middle">
+      <g transform="translate(36 28)"><rect width="118" height="54" rx="12" fill="#14201D" stroke="#B8FFD8" stroke-opacity=".4"/><text x="59" y="33" fill="#B8FFD8">agent</text></g>
+      <path d="M164 55h42" stroke="#3D514B" stroke-width="2"/><path d="m201 50 7 5-7 5" fill="none" stroke="#3D514B" stroke-width="2"/>
+      <g transform="translate(216 28)"><rect width="118" height="54" rx="12" fill="#111B1A" stroke="#2A3A36"/><text x="59" y="33" fill="#DDE8E3">discover</text></g>
+      <path d="M344 55h42" stroke="#3D514B" stroke-width="2"/><path d="m381 50 7 5-7 5" fill="none" stroke="#3D514B" stroke-width="2"/>
+      <g transform="translate(396 28)"><rect width="118" height="54" rx="12" fill="#111B1A" stroke="#2A3A36"/><text x="59" y="33" fill="#DDE8E3">query</text></g>
+      <path d="M524 55h42" stroke="#3D514B" stroke-width="2"/><path d="m561 50 7 5-7 5" fill="none" stroke="#3D514B" stroke-width="2"/>
+      <g transform="translate(576 28)"><rect width="118" height="54" rx="12" fill="#111B1A" stroke="#2A3A36"/><text x="59" y="33" fill="#DDE8E3">media</text></g>
+      <path d="M704 55h42" stroke="#3D514B" stroke-width="2"/><path d="m741 50 7 5-7 5" fill="none" stroke="#3D514B" stroke-width="2"/>
+      <g transform="translate(756 28)"><rect width="118" height="54" rx="12" fill="#111B1A" stroke="#2A3A36"/><text x="59" y="33" fill="#DDE8E3">preview</text></g>
+      <path d="M884 55h42" stroke="#3D514B" stroke-width="2"/><path d="m921 50 7 5-7 5" fill="none" stroke="#3D514B" stroke-width="2"/>
+      <g transform="translate(936 28)"><rect width="118" height="54" rx="12" fill="#231A17" stroke="#FF8066" stroke-opacity=".55"/><text x="59" y="33" fill="#FFB6A6">commit</text></g>
+      <path d="M1064 55h42" stroke="#3D514B" stroke-width="2"/><path d="m1101 50 7 5-7 5" fill="none" stroke="#3D514B" stroke-width="2"/>
+      <g transform="translate(1116 28)"><rect width="104" height="54" rx="12" fill="#14201D" stroke="#B8FFD8" stroke-opacity=".5"/><text x="52" y="33" fill="#B8FFD8">receipt</text></g>
+    </g>
+  </g>
+</svg>

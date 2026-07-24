@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Agent Native Web logo</title>
+  <desc id="desc">Three connected mint nodes forming an arrow on a dark rounded square.</desc>
+  <rect width="256" height="256" rx="56" fill="#0A1211"/>
+  <path d="M58 73h66c39 0 70 31 70 70v15" fill="none" stroke="#2A3A36" stroke-width="18" stroke-linecap="round"/>
+  <path d="M61 183h69c35 0 64-29 64-64V96" fill="none" stroke="#B8FFD8" stroke-width="18" stroke-linecap="round"/>
+  <path d="m165 122 29-29 29 29" fill="none" stroke="#FF8066" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="61" cy="73" r="18" fill="#75A7FF"/>
+  <circle cx="61" cy="183" r="18" fill="#B8FFD8"/>
+  <circle cx="194" cy="93" r="9" fill="#FF8066"/>
+</svg>

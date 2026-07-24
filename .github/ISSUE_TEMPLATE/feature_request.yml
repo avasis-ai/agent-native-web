@@ -1,0 +1,75 @@
+name: Feature or protocol proposal
+description: Propose an agent capability, adapter, protocol change, or developer improvement.
+title: "[Proposal]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the agent task and the cooperating-site contract it needs. Project-specific protocol extensions must remain distinct from adopted standards.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Agent task or problem
+      description: Name the workflow, user need, and current limitation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed capability
+      description: Include request, response, state, media, and action behavior where relevant.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Primary area
+      options:
+        - Protocol and discovery
+        - Query and content
+        - State and events
+        - Actions and receipts
+        - Direct media
+        - CLI
+        - MCP
+        - NLWeb
+        - Operations and deployment
+    validations:
+      required: true
+
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility and security
+      description: Cover versioning, failure behavior, authentication, authorization, privacy, replay, and prompt-injection risks.
+    validations:
+      required: true
+
+  - type: textarea
+    id: browserless
+    attributes:
+      label: Browserless execution
+      description: Explain how agents use this capability without browser control, webpage screenshots, or DOM and accessibility snapshots.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Include existing standards or project interfaces that may cover the task.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched for an existing issue or proposal.
+          required: true
+        - label: I have not presented an experimental extension as an adopted standard.
+          required: true

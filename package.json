@@ -1,0 +1,40 @@
+{
+  "name": "agent-native-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Contract-native web infrastructure for agents: typed resources, direct media, live state, safe actions, and receipts.",
+  "homepage": "https://github.com/avasis-ai/agent-native-web#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avasis-ai/agent-native-web.git"
+  },
+  "bugs": {
+    "url": "https://github.com/avasis-ai/agent-native-web/issues"
+  },
+  "keywords": [
+    "ai-agents",
+    "agent-native-web",
+    "browserless",
+    "mcp",
+    "nlweb",
+    "automation"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "agentweb": "./src/cli.mjs",
+    "agentweb-mcp": "./src/mcp.mjs"
+  },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "cli": "node src/cli.mjs",
+    "mcp": "node src/mcp.mjs",
+    "demo": "node examples/browserless-purchase.mjs",
+    "benchmark": "node scripts/benchmark.mjs",
+    "test": "node --test --test-reporter=spec test/*.test.mjs",
+    "verify": "node scripts/verify-no-browser.mjs && npm test"
+  },
+  "license": "MIT"
+}

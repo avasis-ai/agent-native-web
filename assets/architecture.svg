@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="800" viewBox="0 0 1440 800" role="img" aria-labelledby="title desc">
+  <title id="title">Agent Native Web architecture</title>
+  <desc id="desc">One authoritative domain core serves both the human HTML interface and direct agent interfaces including HTTP, CLI, MCP, and NLWeb, with media, state, and transaction safety layers.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#08110F"/><stop offset="1" stop-color="#111A1A"/></linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="10" stdDeviation="14" flood-opacity=".28"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0l10 5-10 5z" fill="#526A62"/></marker>
+  </defs>
+  <rect width="1440" height="800" rx="26" fill="url(#bg)"/>
+  <rect x="1" y="1" width="1438" height="798" rx="25" fill="none" stroke="#B8FFD8" stroke-opacity=".16"/>
+  <text x="72" y="82" fill="#F2FAF6" font-family="Inter, ui-sans-serif, system-ui" font-size="38" font-weight="750">One domain model. Two native interfaces.</text>
+  <text x="72" y="120" fill="#8FA39C" font-family="Inter, ui-sans-serif, system-ui" font-size="19">The browser is a human adapter, not the agent runtime.</text>
+
+  <g filter="url(#s)" font-family="Inter, ui-sans-serif, system-ui">
+    <g transform="translate(70 205)">
+      <rect width="260" height="186" rx="20" fill="#111B1A" stroke="#2F433D"/>
+      <circle cx="34" cy="34" r="8" fill="#75A7FF"/><text x="54" y="42" fill="#DDE8FF" font-size="14" font-weight="700" letter-spacing="2">HUMAN SURFACE</text>
+      <text x="28" y="91" fill="#F0F5F3" font-size="25" font-weight="720">HTML storefront</text>
+      <text x="28" y="126" fill="#91A39D" font-size="16">CSS · forms · visual layout</text>
+      <rect x="28" y="146" width="145" height="26" rx="13" fill="#18232B"/><text x="42" y="165" fill="#9AB8F3" font-family="ui-monospace, monospace" font-size="12">Accept: text/html</text>
+    </g>
+    <g transform="translate(1110 205)">
+      <rect width="260" height="186" rx="20" fill="#111B1A" stroke="#2F433D"/>
+      <circle cx="34" cy="34" r="8" fill="#B8FFD8"/><text x="54" y="42" fill="#DDF7E8" font-size="14" font-weight="700" letter-spacing="2">AGENT SURFACE</text>
+      <text x="28" y="91" fill="#F0F5F3" font-size="25" font-weight="720">Typed capabilities</text>
+      <text x="28" y="126" fill="#91A39D" font-size="16">HTTP · CLI · MCP · NLWeb</text>
+      <rect x="28" y="146" width="194" height="26" rx="13" fill="#14231E"/><text x="42" y="165" fill="#B8FFD8" font-family="ui-monospace, monospace" font-size="12">Accept: application/ld+json</text>
+    </g>
+  </g>
+
+  <path d="M330 298h176" stroke="#526A62" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M934 298h176" stroke="#526A62" stroke-width="3" marker-end="url(#arrow)"/>
+  <g transform="translate(506 170)" filter="url(#s)" font-family="Inter, ui-sans-serif, system-ui">
+    <rect width="428" height="255" rx="28" fill="#B8FFD8"/>
+    <text x="38" y="56" fill="#173128" font-size="14" font-weight="800" letter-spacing="2.6">AUTHORITATIVE CORE</text>
+    <text x="38" y="105" fill="#07100F" font-size="31" font-weight="800">Domain services + policy</text>
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" fill="#173128">
+      <text x="40" y="151">products · carts · orders</text>
+      <text x="40" y="182">validation · revisions · events</text>
+      <text x="40" y="213">persistence · audit · receipts</text>
+    </g>
+  </g>
+
+  <path d="M720 425v76" stroke="#526A62" stroke-width="3" marker-end="url(#arrow)"/>
+  <g transform="translate(70 516)" font-family="Inter, ui-sans-serif, system-ui">
+    <g>
+      <rect width="392" height="206" rx="22" fill="#111B1A" stroke="#2F433D"/>
+      <text x="28" y="44" fill="#75A7FF" font-size="14" font-weight="800" letter-spacing="2">DIRECT MEDIA</text>
+      <text x="28" y="86" fill="#F0F5F3" font-size="23" font-weight="720">Original bytes, not screenshots</text>
+      <text x="28" y="122" fill="#91A39D" font-size="16">Source images · addressable regions</text>
+      <text x="28" y="150" fill="#91A39D" font-size="16">Chart data · scene graphs · hashes</text>
+      <rect x="28" y="172" width="112" height="7" rx="4" fill="#75A7FF"/><rect x="148" y="172" width="63" height="7" rx="4" fill="#324B68"/><rect x="219" y="172" width="130" height="7" rx="4" fill="#23303C"/>
+    </g>
+    <g transform="translate(454)">
+      <rect width="392" height="206" rx="22" fill="#111B1A" stroke="#2F433D"/>
+      <text x="28" y="44" fill="#B8FFD8" font-size="14" font-weight="800" letter-spacing="2">LIVE STATE</text>
+      <text x="28" y="86" fill="#F0F5F3" font-size="23" font-weight="720">Baseline once, deltas after</text>
+      <text x="28" y="122" fill="#91A39D" font-size="16">Stable IDs · monotonic sequences</text>
+      <text x="28" y="150" fill="#91A39D" font-size="16">SSE · JSON Patch · gap recovery</text>
+      <path d="M31 178h66l20-18 25 28 26-15 34 5 30-31 28 31h108" fill="none" stroke="#B8FFD8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <g transform="translate(908)">
+      <rect width="392" height="206" rx="22" fill="#111B1A" stroke="#2F433D"/>
+      <text x="28" y="44" fill="#FF8066" font-size="14" font-weight="800" letter-spacing="2">SAFE TRANSACTIONS</text>
+      <text x="28" y="86" fill="#F0F5F3" font-size="23" font-weight="720">Preview before consequence</text>
+      <text x="28" y="122" fill="#91A39D" font-size="16">Approval · stale-state rejection</text>
+      <text x="28" y="150" fill="#91A39D" font-size="16">Idempotent commit · durable receipt</text>
+      <g transform="translate(28 168)"><rect width="88" height="25" rx="12" fill="#281A17"/><text x="44" y="17" fill="#FFB6A6" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11">preview</text><path d="M96 12h28" stroke="#5E4944"/><rect x="132" width="88" height="25" rx="12" fill="#281A17"/><text x="176" y="17" fill="#FFB6A6" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11">commit</text><path d="M228 12h28" stroke="#5E4944"/><rect x="264" width="88" height="25" rx="12" fill="#14231E"/><text x="308" y="17" fill="#B8FFD8" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11">receipt</text></g>
+    </g>
+  </g>
+</svg>
