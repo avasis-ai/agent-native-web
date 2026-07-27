@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Describe the agent task and the cooperating-site contract it needs. Project-specific protocol extensions must remain distinct from adopted standards.
+        Describe the agent task and the cooperating-site contract, reviewed adapter, or conservative compatibility behavior it needs. Project-specific protocol extensions must remain distinct from adopted standards.
 
   - type: textarea
     id: problem
@@ -35,6 +35,7 @@ body:
         - State and events
         - Actions and receipts
         - Direct media
+        - HTTP Form Bridge
         - CLI
         - MCP
         - NLWeb

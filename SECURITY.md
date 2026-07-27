@@ -37,6 +37,7 @@ Reports are useful when they cover:
 - path traversal, unsafe file persistence, request smuggling, or denial of service;
 - state stream disclosure or event replay across principals;
 - media integrity, region bounds, content-type confusion, or untrusted metadata;
+- HTTP bridge SSRF/DNS rebinding, redirect credential leakage, cookie isolation, secret redaction, form/approval binding, or ambiguous retry behavior;
 - MCP framing, tool argument validation, or prompt-injection boundaries;
 - container isolation and vulnerable dependencies.
 

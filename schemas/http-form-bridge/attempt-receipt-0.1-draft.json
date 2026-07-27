@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/avasis-ai/agent-native-web/main/schemas/http-form-bridge/attempt-receipt-0.1-draft.json",
+  "title": "HTTP Form Bridge attempt receipt",
+  "description": "A local dispatch record. It separates transport observations from independently verified remote outcomes.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "protocol",
+    "protocol_version",
+    "kind",
+    "receipt_id",
+    "authority",
+    "authority_limit",
+    "preview_id",
+    "preview_digest",
+    "request_digest",
+    "dispatch",
+    "outcome",
+    "evidence_refs",
+    "started_at",
+    "observed_at",
+    "receipt_digest"
+  ],
+  "properties": {
+    "$schema": { "const": "https://raw.githubusercontent.com/avasis-ai/agent-native-web/main/schemas/http-form-bridge/attempt-receipt-0.1-draft.json" },
+    "protocol": { "const": "http-form-bridge" },
+    "protocol_version": { "const": "0.1-draft" },
+    "kind": { "const": "attempt_receipt" },
+    "receipt_id": { "type": "string", "minLength": 1 },
+    "authority": { "const": "bridge_local_observation" },
+    "authority_limit": { "type": "string", "minLength": 1 },
+    "preview_id": { "type": "string", "minLength": 1 },
+    "preview_digest": { "$ref": "#/$defs/publicDigest" },
+    "request_digest": { "$ref": "#/$defs/privateDigest" },
+    "dispatch": { "enum": ["not_sent", "sent", "response_received", "transport_ambiguous"] },
+    "outcome": { "enum": ["unverified", "pending_verified", "succeeded_verified", "failed_verified", "partial_verified", "mismatch", "unknown"] },
+    "response": { "type": "object" },
+    "verification": { "type": "object" },
+    "site_receipt": {},
+    "error": { "type": "object" },
+    "evidence_refs": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "started_at": { "type": "string", "format": "date-time" },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "receipt_digest": { "$ref": "#/$defs/publicDigest" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "dispatch": { "const": "not_sent" } }, "required": ["dispatch"] },
+      "then": { "properties": { "outcome": { "const": "unverified" } } }
+    },
+    {
+      "if": { "properties": { "dispatch": { "const": "response_received" } }, "required": ["dispatch"] },
+      "then": { "required": ["response"] }
+    },
+    {
+      "if": { "properties": { "dispatch": { "const": "transport_ambiguous" } }, "required": ["dispatch"] },
+      "then": { "properties": { "outcome": { "not": { "const": "unverified" } } } }
+    },
+    {
+      "if": { "properties": { "outcome": { "enum": ["pending_verified", "succeeded_verified", "failed_verified", "partial_verified", "mismatch"] } }, "required": ["outcome"] },
+      "then": {
+        "anyOf": [
+          { "required": ["site_receipt"] },
+          {
+            "required": ["verification"],
+            "properties": {
+              "verification": {
+                "anyOf": [
+                  { "required": ["evidence_refs"], "properties": { "evidence_refs": { "type": "array", "minItems": 1 } } },
+                  { "required": ["evidenceRefs"], "properties": { "evidenceRefs": { "type": "array", "minItems": 1 } } }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "additionalProperties": true,
+  "$defs": {
+    "privateDigest": {
+      "type": "string",
+      "pattern": "^hmac-sha256:[0-9a-f]{64}$"
+    },
+    "publicDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

@@ -15,6 +15,12 @@ Status: experimental reference profile, not an Internet standard.
 9. Every mutation requires an idempotency key and returns a receipt.
 10. Unsupported visual or legacy behavior fails explicitly; there is no hidden browser fallback.
 
+## Compatibility rail is not this authority
+
+The HTTP Form Bridge 0.1 draft is a separate `standard_html` compatibility profile. It may infer the syntax of a request from inert HTML, but it does not satisfy this profile's preview, idempotency, or receipt invariants. Its artifacts are named `request_preview` and `attempt_receipt`, never effect preview or site receipt.
+
+`AgentWebClient.discover()` continues to return `UNSUPPORTED_AGENT_SITE` when this native manifest is absent. A caller must explicitly create `HttpBridgeClient`; the native bearer token is not shared between the clients. See [HTTP Form Bridge](./http-bridge.md).
+
 ## Discovery
 
 The canonical manifest is `/agent/manifest.json`. Human resource responses also include an RFC 8288 `Link` header using the unregistered extension relation `https://agent-web.dev/rels/agent-manifest`. `/.well-known/agent.json` is a convenience alias only; this profile does not claim that name is registered.

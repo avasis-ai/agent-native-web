@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/avasis-ai/agent-native-web/main/schemas/http-form-bridge/inferred-contract-0.1-draft.json",
+  "title": "HTTP Form Bridge inferred contract",
+  "description": "The stable public envelope for a conservative contract inferred from inert HTML and HTTP observations. Operation extensions remain open during the 0.1 draft.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "protocol",
+    "protocol_version",
+    "profile",
+    "profile_version",
+    "kind",
+    "rail",
+    "automation_ceiling",
+    "target",
+    "observed_at",
+    "fingerprints",
+    "assurance",
+    "evidence",
+    "operations",
+    "refusals",
+    "contract_id",
+    "contract_digest"
+  ],
+  "properties": {
+    "$schema": { "const": "https://raw.githubusercontent.com/avasis-ai/agent-native-web/main/schemas/http-form-bridge/inferred-contract-0.1-draft.json" },
+    "protocol": { "const": "http-form-bridge" },
+    "protocol_version": { "const": "0.1-draft" },
+    "profile": { "const": "agent-wire-contract" },
+    "profile_version": { "const": "0.1-draft" },
+    "kind": { "const": "inferred_contract" },
+    "rail": { "enum": ["standard_html", "verified_adapter", "unsupported"] },
+    "automation_ceiling": { "enum": ["inspect", "read", "prepare", "approved_dispatch", "approved_commit", "autonomous_commit"] },
+    "target": {
+      "type": "object",
+      "required": ["requested_url", "final_url", "canonical_origin"],
+      "properties": {
+        "requested_url": { "type": "string", "format": "uri" },
+        "final_url": { "type": "string", "format": "uri" },
+        "canonical_origin": { "type": "string", "format": "uri" }
+      },
+      "additionalProperties": true
+    },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "valid_until": { "type": "string", "format": "date-time" },
+    "session": { "type": "object" },
+    "fingerprints": { "type": "object" },
+    "assurance": { "type": "object" },
+    "evidence": {
+      "type": "array",
+      "items": { "$ref": "./evidence-0.1-draft.json" }
+    },
+    "operations": { "type": "array", "items": { "type": "object" } },
+    "refusals": { "type": "array", "items": { "type": "object" } },
+    "contract_id": { "type": "string", "minLength": 1 },
+    "contract_digest": { "$ref": "#/$defs/publicDigest" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "rail": { "const": "standard_html" } }, "required": ["rail"] },
+      "then": { "properties": { "automation_ceiling": { "enum": ["inspect", "read", "prepare", "approved_dispatch"] } } }
+    },
+    {
+      "if": { "properties": { "rail": { "const": "unsupported" } }, "required": ["rail"] },
+      "then": { "properties": { "automation_ceiling": { "const": "inspect" } } }
+    }
+  ],
+  "additionalProperties": true,
+  "$defs": {
+    "publicDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

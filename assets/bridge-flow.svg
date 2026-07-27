@@ -1,0 +1,83 @@
+<!-- Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 · alignment grid: 72px -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="640" viewBox="0 0 1440 640" role="img" aria-labelledby="title desc">
+  <title id="title">HTTP Form Bridge assurance flow</title>
+  <desc id="desc">A six-step browserless flow from raw HTML through network validation, inert form compilation, a bound application request plan and one dispatch to an attempt receipt that does not claim the remote effect.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07100F"/><stop offset="1" stop-color="#111A1A"/></linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#B8FFD8" stroke-opacity=".045"/></pattern>
+  </defs>
+  <rect width="1440" height="640" rx="28" fill="url(#bg)"/>
+  <rect width="1440" height="640" rx="28" fill="url(#grid)"/>
+  <rect x="1" y="1" width="1438" height="638" rx="27" fill="none" stroke="#B8FFD8" stroke-opacity=".16"/>
+
+  <text x="72" y="78" fill="#F2FAF6" font-family="Inter, ui-sans-serif, system-ui" font-size="38" font-weight="760">Compatibility without pretending authority.</text>
+  <text x="72" y="116" fill="#91A39D" font-family="Inter, ui-sans-serif, system-ui" font-size="19">Bound request evidence from raw HTTP. No renderer, JavaScript execution, DOM snapshot, or screenshot.</text>
+
+  <g transform="translate(72 176)" font-family="Inter, ui-sans-serif, system-ui">
+    <g>
+      <rect width="176" height="142" rx="18" fill="#111B1A" stroke="#2F433D"/>
+      <text x="22" y="35" fill="#75A7FF" font-size="14" font-weight="800" letter-spacing="1.8">01 · FETCH</text>
+      <text x="22" y="76" fill="#F0F5F3" font-size="22" font-weight="720">Raw HTML</text>
+      <text x="22" y="107" fill="#91A39D" font-size="16">HTTP bytes only</text>
+      <text x="22" y="130" fill="#91A39D" font-size="16">No subresources</text>
+    </g>
+    <path d="M184 71h28m-8-6 8 6-8 6" fill="none" stroke="#526A62" stroke-width="2"/>
+    <g transform="translate(220)">
+      <rect width="176" height="142" rx="18" fill="#111B1A" stroke="#2F433D"/>
+      <text x="22" y="35" fill="#75A7FF" font-size="14" font-weight="800" letter-spacing="1.8">02 · GUARD</text>
+      <text x="22" y="76" fill="#F0F5F3" font-size="22" font-weight="720">Pin origin</text>
+      <text x="22" y="107" fill="#91A39D" font-size="16">DNS · TLS · SSRF</text>
+      <text x="22" y="130" fill="#91A39D" font-size="16">Cookie isolation</text>
+    </g>
+    <path d="M404 71h28m-8-6 8 6-8 6" fill="none" stroke="#526A62" stroke-width="2"/>
+    <g transform="translate(440)">
+      <rect width="176" height="142" rx="18" fill="#111B1A" stroke="#2F433D"/>
+      <text x="22" y="35" fill="#B8FFD8" font-size="14" font-weight="800" letter-spacing="1.8">03 · COMPILE</text>
+      <text x="22" y="76" fill="#F0F5F3" font-size="22" font-weight="720">Typed form</text>
+      <text x="22" y="107" fill="#91A39D" font-size="16">Ordered controls</text>
+      <text x="22" y="130" fill="#91A39D" font-size="16">Hidden fingerprints</text>
+    </g>
+    <path d="M624 71h28m-8-6 8 6-8 6" fill="none" stroke="#526A62" stroke-width="2"/>
+    <g transform="translate(660)">
+      <rect width="176" height="142" rx="18" fill="#14201D" stroke="#B8FFD8" stroke-opacity=".42"/>
+      <text x="22" y="35" fill="#B8FFD8" font-size="14" font-weight="800" letter-spacing="1.8">04 · PREVIEW</text>
+      <text x="22" y="76" fill="#F0F5F3" font-size="22" font-weight="720">Keyed plan</text>
+      <text x="22" y="107" fill="#91A39D" font-size="16">Secrets redacted</text>
+      <text x="22" y="130" fill="#91A39D" font-size="16">Effect: unknown</text>
+    </g>
+    <path d="M844 71h28m-8-6 8 6-8 6" fill="none" stroke="#526A62" stroke-width="2"/>
+    <g transform="translate(880)">
+      <rect width="176" height="142" rx="18" fill="#261A16" stroke="#FF8066" stroke-opacity=".52"/>
+      <text x="22" y="35" fill="#FF8066" font-size="14" font-weight="800" letter-spacing="1.8">05 · APPROVE</text>
+      <text x="22" y="76" fill="#F0F5F3" font-size="22" font-weight="720">Send once</text>
+      <text x="22" y="107" fill="#91A39D" font-size="16">Re-fetch first</text>
+      <text x="22" y="130" fill="#91A39D" font-size="16">Never blind-retry</text>
+    </g>
+    <path d="M1064 71h28m-8-6 8 6-8 6" fill="none" stroke="#526A62" stroke-width="2"/>
+    <g transform="translate(1100)">
+      <rect width="176" height="142" rx="18" fill="#151F2A" stroke="#75A7FF" stroke-opacity=".5"/>
+      <text x="22" y="35" fill="#75A7FF" font-size="14" font-weight="800" letter-spacing="1.8">06 · RECEIPT</text>
+      <text x="22" y="76" fill="#F0F5F3" font-size="22" font-weight="720">Attempt only</text>
+      <text x="22" y="107" fill="#91A39D" font-size="16">Dispatch separate</text>
+      <text x="22" y="130" fill="#91A39D" font-size="16">Outcome unverified</text>
+    </g>
+  </g>
+
+  <g transform="translate(72 386)" font-family="Inter, ui-sans-serif, system-ui">
+    <rect width="628" height="174" rx="22" fill="#102019" stroke="#B8FFD8" stroke-opacity=".38"/>
+    <circle cx="34" cy="38" r="8" fill="#B8FFD8"/>
+    <text x="56" y="45" fill="#B8FFD8" font-size="17" font-weight="800" letter-spacing="2">PROVES LOCALLY</text>
+    <text x="30" y="91" fill="#F0F5F3" font-size="23" font-weight="720">Request plan + dispatch evidence</text>
+    <text x="30" y="127" fill="#91A39D" font-size="18">Method · URL · body · cookie binding</text>
+    <text x="30" y="154" fill="#91A39D" font-size="18">Observed status · redirects · response hash</text>
+
+    <g transform="translate(668)">
+      <rect width="628" height="174" rx="22" fill="#211815" stroke="#FF8066" stroke-opacity=".4"/>
+      <circle cx="34" cy="38" r="8" fill="#FF8066"/>
+      <text x="56" y="45" fill="#FFB6A6" font-size="17" font-weight="800" letter-spacing="2">DOES NOT PROVE</text>
+      <text x="30" y="91" fill="#F0F5F3" font-size="23" font-weight="720">Intent + identity + remote effect</text>
+      <text x="30" y="127" fill="#91A39D" font-size="18">No semantic preview · no upstream idempotency</text>
+      <text x="30" y="154" fill="#91A39D" font-size="18">No generic success inference from 200 or cookies</text>
+    </g>
+  </g>
+</svg>

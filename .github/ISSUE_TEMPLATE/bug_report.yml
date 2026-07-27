@@ -20,6 +20,7 @@ body:
         - NLWeb
         - State or SSE
         - Media
+        - HTTP Form Bridge
         - Persistence or containers
         - Other
     validations:
