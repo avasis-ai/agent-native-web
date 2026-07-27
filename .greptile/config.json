@@ -1,0 +1,85 @@
+{
+  "strictness": 2,
+  "commentTypes": [
+    "logic",
+    "syntax"
+  ],
+  "includeBranches": [
+    "main"
+  ],
+  "triggerOnUpdates": true,
+  "statusCheck": true,
+  "statusCommentsEnabled": true,
+  "fixWithAI": false,
+  "ignorePatterns": "node_modules/**\nassets/social-preview.png",
+  "summarySection": {
+    "included": true,
+    "collapsible": false,
+    "defaultOpen": true
+  },
+  "issuesTableSection": {
+    "included": true,
+    "collapsible": false,
+    "defaultOpen": true
+  },
+  "confidenceScoreSection": {
+    "included": true
+  },
+  "sequenceDiagramSection": {
+    "included": true,
+    "collapsible": true,
+    "defaultOpen": false
+  },
+  "instructions": "Prioritize concrete security, protocol-correctness, browser-semantics, authentication, privacy, concurrency, and ambiguous-write failures. Look specifically for both false positives that unnecessarily reject supported static HTML and false negatives that could authorize a request under changed or unsupported semantics. Do not report cosmetic style preferences. Every finding must identify a reproducible failure or credible exploit path and account for the documented lower-assurance boundary.",
+  "rules": [
+    {
+      "id": "fail-closed-compatibility",
+      "rule": "Never introduce a silent browser, renderer, screenshot, DOM snapshot, or JavaScript-execution fallback. Unsupported or dynamic behavior must remain a typed refusal or explicit handoff.",
+      "scope": [
+        "src/**",
+        "schemas/**"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "protect-capability-material",
+      "rule": "Never expose real credentials, cookies, authorization headers, hidden managed values, request bodies, or potentially capability-bearing URL path and query material in public contracts, errors, logs, receipts, or documentation. Unmistakable inert placeholders and synthetic test fixtures are not credential leaks.",
+      "scope": [
+        "src/**",
+        "schemas/**",
+        "docs/**",
+        "README.md",
+        ".github/**"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "preserve-write-ambiguity",
+      "rule": "Non-safe requests must not be retried automatically. Dispatch evidence and remote business outcome must remain separate, and an uncertain transport result must never be reported as not sent or successful.",
+      "scope": [
+        "src/**",
+        "schemas/**"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "bind-review-to-dispatch",
+      "rule": "Any approved write must remain bound to the exact application request, selected credentials, form and action semantics, private managed values, and fresh authentication evidence immediately before dispatch.",
+      "scope": [
+        "src/http-bridge/**",
+        "schemas/http-form-bridge/**"
+      ],
+      "severity": "high"
+    },
+    {
+      "id": "evidence-backed-claims",
+      "rule": "Documentation must not claim arbitrary browser replacement, authenticated identity, upstream exactly-once execution, rendered-pixel understanding, or verified business outcome without matching implementation and test evidence.",
+      "scope": [
+        "README.md",
+        "VERIFICATION.md",
+        "docs/**"
+      ],
+      "severity": "high"
+    }
+  ]
+}
