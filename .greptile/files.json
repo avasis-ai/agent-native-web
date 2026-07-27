@@ -1,0 +1,40 @@
+{
+  "files": [
+    {
+      "path": "docs/http-bridge.md",
+      "description": "Normative compatibility boundary, supported static HTML subset, auth behavior, preview and dispatch model, and explicit non-claims.",
+      "scope": [
+        "src/http-bridge/**",
+        "schemas/http-form-bridge/**",
+        "test/http-bridge-*.test.mjs"
+      ]
+    },
+    {
+      "path": "docs/security.md",
+      "description": "Threat model and required network, credential, freshness, privacy, replay, and ambiguous-outcome controls.",
+      "scope": [
+        "src/**",
+        "schemas/**",
+        "test/**"
+      ]
+    },
+    {
+      "path": "VERIFICATION.md",
+      "description": "Audited claims, adversarial coverage, benchmark boundaries, and explicit limits that implementation changes must preserve.",
+      "scope": [
+        "src/**",
+        "schemas/**",
+        "README.md",
+        "docs/**"
+      ]
+    },
+    {
+      "path": "schemas/http-form-bridge/problems-0.1-draft.json",
+      "description": "Machine-readable public refusal registry; review new failure modes for a stable typed refusal instead of an approximation.",
+      "scope": [
+        "src/http-bridge/**",
+        "schemas/http-form-bridge/**"
+      ]
+    }
+  ]
+}
