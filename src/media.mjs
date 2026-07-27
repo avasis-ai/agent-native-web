@@ -205,6 +205,7 @@ export class MediaRegistry {
   constructor(store) {
     this.store = store;
     this.cache = new Map();
+    this.namedRegionCache = new Map();
   }
 
   has(id) {
@@ -221,7 +222,17 @@ export class MediaRegistry {
       this.cache.set(id, original);
     }
     const region = parseRegion(regionValue);
-    return region ? crop(original, region) : Buffer.from(original);
+    if (!region) return Buffer.from(original);
+    if (regionValue === 'inspection-mark') {
+      const cacheKey = `${id}:${regionValue}`;
+      let regionBytes = this.namedRegionCache.get(cacheKey);
+      if (!regionBytes) {
+        regionBytes = crop(original, region);
+        this.namedRegionCache.set(cacheKey, regionBytes);
+      }
+      return Buffer.from(regionBytes);
+    }
+    return crop(original, region);
   }
 
   descriptor(id, origin) {
@@ -229,6 +240,7 @@ export class MediaRegistry {
     if (!entry) throw new HttpError(404, 'MEDIA_NOT_FOUND', `Unknown media resource: ${id}`);
     if (entry.kind === 'image') {
       const bytes = this.imageBytes(id);
+      const inspectionMarkBytes = this.imageBytes(id, 'inspection-mark');
       return {
         id,
         kind: 'image',
@@ -246,6 +258,8 @@ export class MediaRegistry {
           id: 'inspection-mark',
           selector: { type: 'FragmentSelector', conformsTo: 'https://www.w3.org/TR/media-frags/', value: `xywh=pixel:${PANEL.x},${PANEL.y},${PANEL.width},${PANEL.height}` },
           content_url: `${origin}/api/agent/v1/media/${encodeURIComponent(id)}/content?region=inspection-mark`,
+          byte_size: inspectionMarkBytes.length,
+          sha256: createHash('sha256').update(inspectionMarkBytes).digest('hex'),
           purpose: 'machine-readable inspection mark',
           encoding: 'ascii-7-grid-v1'
         }],

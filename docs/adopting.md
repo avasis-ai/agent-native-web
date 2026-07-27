@@ -4,6 +4,8 @@ Agent Native Web adds an agent surface beside your human interface. Both surface
 
 This guide describes the experimental `0.1` profile implemented by this repository. Treat it as a reference contract, not an adopted web standard.
 
+The repository also includes an HTTP Form Bridge for legacy sites. That bridge is a migration and compatibility tool, not a substitute for this adoption path: inferred HTML cannot publish authoritative effects, retry semantics, authorization scopes, or outcome receipts on behalf of a site.
+
 ## 1. Start from domain operations
 
 List the tasks your site owns as domain operations:
@@ -99,3 +101,12 @@ Test at least:
 - prompt injection inside descriptive data.
 
 Use this repository's `npm run verify` and test directory as a small executable example.
+
+## 9. Use inference to plan migration
+
+Run `node src/cli.mjs bridge inspect https://legacy.example/form` against server-rendered forms you already own. The result inventories field schemas, submitter variants, unsupported mechanics, script participation, and auth-interaction signals. Use that inventory to prioritize native operations:
+
+- migrate frequent or consequential writes first;
+- keep stable search/filter forms on the compatibility rail when an unverified request is sufficient;
+- add a reviewed adapter only when a legacy service cannot yet expose a native contract;
+- never treat a bridge attempt receipt as the site's durable business receipt.

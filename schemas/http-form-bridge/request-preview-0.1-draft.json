@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/avasis-ai/agent-native-web/main/schemas/http-form-bridge/request-preview-0.1-draft.json",
+  "title": "HTTP Form Bridge request preview",
+  "description": "A redacted preview that binds an application-request plan without claiming its remote business effect.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "protocol",
+    "protocol_version",
+    "kind",
+    "preview_type",
+    "preview_id",
+    "contract_id",
+    "operation_id",
+    "risk",
+    "request",
+    "request_digest",
+    "approval_binding_digest",
+    "effect",
+    "assurance",
+    "evidence_refs",
+    "bindings",
+    "approval",
+    "created_at",
+    "expires_at",
+    "preview_digest"
+  ],
+  "properties": {
+    "$schema": { "const": "https://raw.githubusercontent.com/avasis-ai/agent-native-web/main/schemas/http-form-bridge/request-preview-0.1-draft.json" },
+    "protocol": { "const": "http-form-bridge" },
+    "protocol_version": { "const": "0.1-draft" },
+    "kind": { "const": "request_preview" },
+    "preview_type": { "const": "request_preview" },
+    "preview_id": { "type": "string", "minLength": 1 },
+    "contract_id": { "type": "string", "minLength": 1 },
+    "operation_id": { "type": "string", "minLength": 1 },
+    "risk": { "type": "string", "minLength": 1 },
+    "request": {
+      "type": "object",
+      "required": ["method", "url"],
+      "properties": {
+        "method": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" }
+      },
+      "additionalProperties": true
+    },
+    "request_digest": { "$ref": "#/$defs/privateDigest" },
+    "approval_binding_digest": { "$ref": "#/$defs/privateDigest" },
+    "effect": {
+      "type": "object",
+      "required": ["status", "reason"],
+      "properties": {
+        "status": { "const": "not_claimed" },
+        "reason": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "assurance": { "type": "object" },
+    "evidence_refs": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "bindings": { "type": "object" },
+    "approval": {
+      "type": "object",
+      "required": ["required", "binds_to", "portable_binds_to"],
+      "properties": {
+        "required": { "type": "boolean" },
+        "binds_to": { "const": "preview_digest" },
+        "portable_binds_to": { "const": "approval_binding_digest" }
+      },
+      "additionalProperties": false
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "expires_at": { "type": "string", "format": "date-time" },
+    "preview_digest": { "$ref": "#/$defs/publicDigest" }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "privateDigest": {
+      "type": "string",
+      "pattern": "^hmac-sha256:[0-9a-f]{64}$"
+    },
+    "publicDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

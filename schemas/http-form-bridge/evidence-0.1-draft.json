@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/avasis-ai/agent-native-web/main/schemas/http-form-bridge/evidence-0.1-draft.json",
+  "title": "HTTP Form Bridge public evidence",
+  "description": "A redacted, content-addressed observation emitted by the HTTP Form Bridge. Evidence extensions remain open during the 0.1 draft.",
+  "type": "object",
+  "required": ["$schema", "id", "digest"],
+  "properties": {
+    "$schema": { "const": "https://raw.githubusercontent.com/avasis-ai/agent-native-web/main/schemas/http-form-bridge/evidence-0.1-draft.json" },
+    "id": { "type": "string", "minLength": 1 },
+    "digest": { "$ref": "#/$defs/publicDigest" }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "publicDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

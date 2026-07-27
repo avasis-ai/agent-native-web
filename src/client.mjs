@@ -26,19 +26,67 @@ function trimSlash(value) {
 
 export class AgentWebClient {
   constructor({ baseUrl, token, fetchImpl = fetch, runId = randomUUID() }) {
-    this.baseUrl = trimSlash(baseUrl);
+    let parsedBase;
+    try {
+      parsedBase = new URL(baseUrl);
+    } catch {
+      throw new TypeError('baseUrl must be an absolute HTTP or HTTPS URL');
+    }
+    if (!['http:', 'https:'].includes(parsedBase.protocol) || parsedBase.username || parsedBase.password) {
+      throw new TypeError('baseUrl must be HTTP or HTTPS without embedded credentials');
+    }
+    parsedBase.hash = '';
+    this.baseUrl = trimSlash(parsedBase.href);
+    this.baseOrigin = parsedBase.origin;
     this.token = token;
     this.fetch = fetchImpl;
     this.runId = runId;
     this.manifest = null;
   }
 
-  async #request(pathOrUrl, { method = 'GET', body, headers = {}, auth = true, accept = 'application/json' } = {}) {
-    const url = pathOrUrl.startsWith('http://') || pathOrUrl.startsWith('https://') ? pathOrUrl : `${this.baseUrl}${pathOrUrl}`;
+  async #request(pathOrUrl, {
+    method = 'GET',
+    body,
+    headers = {},
+    auth = true,
+    accept = 'application/json',
+    exactOrigin = false
+  } = {}) {
+    let parsedUrl;
+    try {
+      parsedUrl = new URL(pathOrUrl, `${this.baseUrl}/`);
+    } catch {
+      throw new AgentProtocolError(502, 'INVALID_CONTRACT_URL', 'The site contract contains an invalid URL');
+    }
+    if (!['http:', 'https:'].includes(parsedUrl.protocol) || parsedUrl.username || parsedUrl.password) {
+      throw new AgentProtocolError(502, 'INVALID_CONTRACT_URL', 'The site contract URL must use HTTP or HTTPS without embedded credentials');
+    }
+    if (exactOrigin && parsedUrl.origin !== this.baseOrigin) {
+      throw new AgentProtocolError(502, 'MEDIA_ORIGIN_POLICY_VIOLATION', 'Direct media URLs must remain on the contract origin');
+    }
     const finalHeaders = { accept, 'x-agent-run-id': this.runId, ...headers };
     if (auth && this.token) finalHeaders.authorization = `Bearer ${this.token}`;
     if (body !== undefined) finalHeaders['content-type'] = 'application/json';
-    const response = await this.fetch(url, { method, headers: finalHeaders, ...(body === undefined ? {} : { body: JSON.stringify(body) }) });
+    const response = await this.fetch(parsedUrl.href, {
+      method,
+      headers: finalHeaders,
+      ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+      ...(exactOrigin ? { redirect: 'manual' } : {})
+    });
+    if (exactOrigin) {
+      if (response.status >= 300 && response.status <= 399) {
+        try { await response.body?.cancel?.(); } catch {}
+        throw new AgentProtocolError(502, 'MEDIA_ORIGIN_POLICY_VIOLATION', 'Direct media redirects require a separately reviewed media origin');
+      }
+      if (response.url) {
+        let responseOrigin;
+        try { responseOrigin = new URL(response.url).origin; } catch { responseOrigin = null; }
+        if (responseOrigin !== this.baseOrigin) {
+          try { await response.body?.cancel?.(); } catch {}
+          throw new AgentProtocolError(502, 'MEDIA_ORIGIN_POLICY_VIOLATION', 'Direct media resolved outside the contract origin');
+        }
+      }
+    }
     if (!response.ok) {
       let envelope;
       try { envelope = await response.json(); } catch { envelope = {}; }
@@ -119,14 +167,18 @@ export class AgentWebClient {
 
   async mediaBytes(id, { region = null, verify = true } = {}) {
     const descriptor = await this.mediaDescriptor(id);
-    const url = region
-      ? descriptor.regions?.find((candidate) => candidate.id === region)?.content_url
-      : descriptor.source?.url;
+    const representation = region
+      ? descriptor.regions?.find((candidate) => candidate.id === region)
+      : descriptor.source;
+    const url = region ? representation?.content_url : representation?.url;
     if (!url) throw new AgentProtocolError(409, 'UNSUPPORTED_REPRESENTATION', `Media ${id} has no requested pixel representation`);
-    const response = await this.#request(url, { auth: false, accept: 'image/*' });
+    if (verify && !/^[0-9a-f]{64}$/.test(representation.sha256 ?? '')) {
+      throw new AgentProtocolError(502, 'MEDIA_INTEGRITY_ERROR', 'Media descriptor does not provide a valid SHA-256 hash for the requested representation');
+    }
+    const response = await this.#request(url, { auth: false, accept: 'image/*', exactOrigin: true });
     const bytes = Buffer.from(await response.arrayBuffer());
     const sha256 = createHash('sha256').update(bytes).digest('hex');
-    if (verify && !region && descriptor.source.sha256 !== sha256) {
+    if (verify && representation.sha256 !== sha256) {
       throw new AgentProtocolError(502, 'MEDIA_INTEGRITY_ERROR', 'Downloaded media does not match its descriptor hash');
     }
     return { bytes, mimeType: response.headers.get('content-type'), sha256, source: response.headers.get('x-media-source'), descriptor };

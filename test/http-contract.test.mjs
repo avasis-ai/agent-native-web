@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import { AgentWebClient } from '../src/client.mjs';
 import { withFixture } from './helpers.mjs';
 
 test('discovers capabilities and negotiates semantic representations', async (t) => {
@@ -54,9 +55,85 @@ test('reads original raster bytes and pixel-only region without a webpage screen
   assert.equal(original.sha256, descriptor.source.sha256);
   assert.equal(original.sha256, createHash('sha256').update(original.bytes).digest('hex'));
 
+  const region = descriptor.regions.find((candidate) => candidate.id === 'inspection-mark');
+  assert.match(region.sha256, /^[0-9a-f]{64}$/);
   const mark = await client.readInspectionMark(id);
   assert.equal(mark.value, 'NOVA731');
   assert.equal(mark.source, 'source-region');
+  assert.equal(mark.sha256, region.sha256);
+});
+
+test('rejects tampered source-region bytes even when response digest headers are unchanged', async (t) => {
+  const { baseUrl } = await withFixture(t);
+  const client = new AgentWebClient({
+    baseUrl,
+    token: 'test-token-123',
+    runId: 'tampered-region-test',
+    fetchImpl: async (url, options) => {
+      const response = await fetch(url, options);
+      if (new URL(url).searchParams.get('region') !== 'inspection-mark') return response;
+      const bytes = Buffer.from(await response.arrayBuffer());
+      bytes[bytes.length - 1] ^= 0xff;
+      return new Response(bytes, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: response.headers
+      });
+    }
+  });
+
+  await assert.rejects(
+    () => client.mediaBytes('media:trailpack-blue:hero', { region: 'inspection-mark' }),
+    (error) => error.code === 'MEDIA_INTEGRITY_ERROR'
+  );
+});
+
+test('direct media cannot turn a contract descriptor into a cross-origin fetch or redirect', async () => {
+  const baseUrl = 'https://contract.example';
+  let offOriginFetches = 0;
+  const crossOriginClient = new AgentWebClient({
+    baseUrl,
+    fetchImpl: async (url) => {
+      if (new URL(url).origin !== baseUrl) offOriginFetches += 1;
+      return new Response(JSON.stringify({
+        source: {
+          url: 'http://169.254.169.254/latest/meta-data',
+          sha256: '0'.repeat(64)
+        }
+      }), { status: 200, headers: { 'content-type': 'application/json' } });
+    }
+  });
+  await assert.rejects(
+    () => crossOriginClient.mediaBytes('media:untrusted'),
+    (error) => error.code === 'MEDIA_ORIGIN_POLICY_VIOLATION'
+  );
+  assert.equal(offOriginFetches, 0);
+
+  const calls = [];
+  const redirectClient = new AgentWebClient({
+    baseUrl,
+    fetchImpl: async (url, options) => {
+      calls.push({ url, redirect: options.redirect });
+      if (new URL(url).pathname.includes('/api/agent/v1/media/')) {
+        return new Response(JSON.stringify({
+          source: {
+            url: `${baseUrl}/media/source.png`,
+            sha256: '0'.repeat(64)
+          }
+        }), { status: 200, headers: { 'content-type': 'application/json' } });
+      }
+      return new Response(null, {
+        status: 302,
+        headers: { location: 'http://169.254.169.254/latest/meta-data' }
+      });
+    }
+  });
+  await assert.rejects(
+    () => redirectClient.mediaBytes('media:redirect'),
+    (error) => error.code === 'MEDIA_ORIGIN_POLICY_VIOLATION'
+  );
+  assert.equal(calls.length, 2);
+  assert.equal(calls[1].redirect, 'manual');
 });
 
 test('represents charts as data/spec and canvas-like maps as a scene graph', async (t) => {

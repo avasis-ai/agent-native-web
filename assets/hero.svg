@@ -39,7 +39,7 @@
     <g>
       <rect width="200" height="44" rx="22" fill="#12211D" stroke="#B8FFD8" stroke-opacity=".42"/>
       <circle cx="23" cy="22" r="6" fill="#B8FFD8"/>
-      <text x="39" y="29" fill="#DFF5E9">22 / 22 tests</text>
+      <text x="39" y="29" fill="#DFF5E9">94 / 94 tests</text>
     </g>
     <g transform="translate(216)">
       <rect width="200" height="44" rx="22" fill="#151F2A" stroke="#75A7FF" stroke-opacity=".42"/>
